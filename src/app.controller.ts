@@ -30,12 +30,12 @@ export class AppController {
 
 
   @Delete(':id') 
-    deletePista(@Param('id')id:string){
+    delete(@Param('id')id: string){
         this.appService.deletePelicula(id)
     }
 
  @Put(':id')
 public update(@Body() pelicula : any, @Param('id') id : string) : string {
-return this.appService.updatePelicula(id, pelicula);
+return this.appService.updatePelicula(pelicula, id);
 }  
   }
