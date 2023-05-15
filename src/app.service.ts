@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Pelicula } from './app.entity';
 import { v4 } from 'uuid';
+import { NotFoundException } from '@nestjs/common';
+
 
 @Injectable()
 export class AppService {
@@ -46,9 +48,15 @@ export class AppService {
     }
     
 
-    deletePelicula(id:string){
-        this.apiPelicula = this.apiPelicula.filter(pelicula=> pelicula.id !== id)
-    }
+    deletePelicula(id: string) {
+        const pelicula = this.apiPelicula.find(pelicula => pelicula.id === id);
+        if (!pelicula) {
+          throw new NotFoundException(`No se encontró la película con ID: ${id}`);
+        }
+      
+        this.apiPelicula = this.apiPelicula.filter(pelicula => pelicula.id !== id);
+      }
+      
     
 
     updatePelicula(peliculaNueva: any, id: string): string{

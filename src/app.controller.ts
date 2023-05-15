@@ -29,9 +29,10 @@ export class AppController {
     }
 
 
-  @Delete(':id') 
-    delete(@Param('id')id: string){
-        this.appService.deletePelicula(id)
+    @Delete(':id')
+    deletePelicula(@Param('id') id: string) {
+      this.appService.deletePelicula(id);
+      return 'Pelicula eliminada correctamente.';
     }
 
  @Put(':id')
